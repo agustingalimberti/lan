@@ -29,7 +29,7 @@ public class Test {
     @When(": selecciono un destino.")
     public void selecciono_un_destino() throws Exception {
     PI.cierreAlerta();
-    PI.elegirOrigenDestinoVuelo();
+    PI.elegirOrigen();
     }
 
     @When(": Lo agrego a la bolsa.")

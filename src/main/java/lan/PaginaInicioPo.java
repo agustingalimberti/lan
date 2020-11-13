@@ -1,48 +1,71 @@
 package lan;
 
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PaginaInicioPo extends BasePage{
-        public PaginaInicioPo(WebDriver driver){
-            super(driver);
-        }
-        String url = "https://www.latam.com/es_ar/";
+public class PaginaInicioPo extends BasePage {
+    public PaginaInicioPo(WebDriver driver) {
+        super(driver);
+    }
 
-        //captura de elementos//
+    String url = "https://www.latam.com/es_ar/";
 
-    @FindBy (xpath = "//button[@id='onesignal-slidedown-cancel-button']")
+    //captura de elementos//
+
+    @FindBy(css = "#onesignal-slidedown-cancel-button")
     WebElement btnCerrarAlerta;
 
-    @FindBy (xpath = "//input[@id='compra-select-origin']")
+    @FindBy(xpath = "//input[@id='compra-select-origin']")
     WebElement origenVuelo;
 
-    @FindBy (xpath = "//input[@id='compra-select-destination']")
+    @FindBy(css = "#ui-id-10")
+    WebElement ciudadBuenosAires;
+
+    @FindBy(xpath = "//input[@id='compra-select-destination']")
     WebElement destinoVuelo;
 
-    @FindBy (xpath = "//button[contains(text(),'Busca tu vuelo')]")
+    @FindBy(css = "#ui-id-2")
+    WebElement ciudadSantiagoChile;
+
+    @FindBy(xpath = "//button[contains(text(),'Busca tu vuelo')]")
     WebElement btnBuscar;
 
+    @FindBy(xpath = "//div[@id='onesignal-slidedown-dialog']")
+    WebElement bannerInicio;
+
     //Metodos//
-    public void Inicio(){
+    public void Inicio() {
         Log("iniciando");
         driver.get(url);
     }
-    public void  cierreAlerta(){
-        if(isVisible())
-        btnCerrarAlerta.click();
+
+    public void cierreAlerta() {
+        waitFor(20);
+        waitForElementToAppear(bannerInicio);
+        if (isVisible(bannerInicio)) {
+            btnCerrarAlerta.click();
+        } else {
+            Log("no aparecio el banner de inicio");
+        }
     }
 
-    public void elegirOrigenDestinoVuelo(){
-        origenVuelo.click();
-        origenVuelo.sendKeys("Buenos Aires");
-        destinoVuelo.click();
-        destinoVuelo.sendKeys("Santiago de Chile");
-        waitForElementToAppear(btnBuscar);
-        btnBuscar.click();
-    }
+    public void elegirOrigen(){
+        waitFor(5);
+        waitForElementToAppear(origenVuelo);
+       origenVuelo.click();
+       origenVuelo.sendKeys("BUE");
+       waitFor(2);
+       if(ciudadBuenosAires.isSelected()) {
+           ciudadBuenosAires.click();
+           ciudadBuenosAires.submit();
+       }else{
+           Log("No se encontro la ciudad");
+       }
     }
 
+}
