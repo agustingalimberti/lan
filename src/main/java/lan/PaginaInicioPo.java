@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class PaginaInicioPo extends BasePage {
     public PaginaInicioPo(WebDriver driver) {
@@ -23,8 +24,11 @@ public class PaginaInicioPo extends BasePage {
     @FindBy(xpath = "//input[@id='compra-select-origin']")
     WebElement origenVuelo;
 
-    @FindBy(css = "#ui-id-10")
+   // @FindBy(css = "#ui-id-10")
+   // WebElement ciudadBuenosAires;
+    @FindBy(xpath = "//span[contains(text(),'Bue')]")
     WebElement ciudadBuenosAires;
+
 
     @FindBy(xpath = "//input[@id='compra-select-destination']")
     WebElement destinoVuelo;
@@ -38,6 +42,14 @@ public class PaginaInicioPo extends BasePage {
     @FindBy(xpath = "//div[@id='onesignal-slidedown-dialog']")
     WebElement bannerInicio;
 
+    @FindBy(xpath="//input[@inputmode='numeric'] [1]")
+    WebElement FechaInicio;
+
+    @FindBy(xpath = "//a[contains(text(),18)] [1]")
+    WebElement Fecha18;
+
+    @FindBy(xpath = "//a[contains(text(),25)] [1]")
+    WebElement FechaVuelta;
     //Metodos//
     public void Inicio() {
         Log("iniciando");
@@ -60,12 +72,23 @@ public class PaginaInicioPo extends BasePage {
        origenVuelo.click();
        origenVuelo.sendKeys("BUE");
        waitFor(2);
-       if(ciudadBuenosAires.isSelected()) {
-           ciudadBuenosAires.click();
-           ciudadBuenosAires.submit();
-       }else{
-           Log("No se encontro la ciudad");
-       }
+        ciudadBuenosAires.click();
+    }
+    public void elegirDestino(){
+        destinoVuelo.click();
+        destinoVuelo.sendKeys("Santiago de Chile");
+        waitFor(2);
+        ciudadSantiagoChile.click();
+    }
+    public void elegirFechasVuelo(){
+        FechaInicio.click();
+        waitFor(2);
+        Fecha18.click();
+        waitFor(2);
+        FechaVuelta.click();
+    }
+    public void buscarVuelo(){
+        btnBuscar.click();
     }
 
 }
