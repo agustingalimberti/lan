@@ -3,9 +3,7 @@ package seleniumCode;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lan.InformacionDelPasajero;
-import lan.PaginaInicioPo;
-import lan.SeleccionDeVuelo;
+import lan.*;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,6 +14,8 @@ public class Test {
     PaginaInicioPo PI;
     SeleccionDeVuelo SV;
     InformacionDelPasajero IP;
+    ElegirButacaVuelos EB;
+    MedioDePago MP;
 
     @Given(": como cliente ingreso a la URL {string}")
     public void como_cliente_ingreso_a_la_url(String string) throws Throwable {
@@ -29,6 +29,8 @@ public class Test {
     this.PI = new PaginaInicioPo(driver);
     this.SV = new SeleccionDeVuelo(driver);
     this.IP = new InformacionDelPasajero(driver);
+    this.EB = new ElegirButacaVuelos(driver);
+    this.MP = new MedioDePago(driver);
     PI.Inicio();
     }
 
@@ -46,15 +48,11 @@ public class Test {
     SV.ElegirVueloDeIda();
     SV.ElegirVueloDeVuelta();
     IP.CompletarDatosPasajero();
+    EB.elegirButaca();
     }
 
     @When(": escojo un medio de pago.")
     public void escojo_un_medio_de_pago() throws Exception {
-
-    }
-
-    @Then(": y simulo la compra.")
-    public void y_simulo_la_compra() throws Exception {
-
+    MP.SeleccionarMedioDePago();
     }
 }

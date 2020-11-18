@@ -1,13 +1,10 @@
 package lan;
 
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import net.bytebuddy.asm.Advice;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 public class PaginaInicioPo extends BasePage {
     public PaginaInicioPo(WebDriver driver) {
@@ -50,6 +47,9 @@ public class PaginaInicioPo extends BasePage {
 
     @FindBy(xpath = "//a[contains(text(),25)] [1]")
     WebElement FechaVuelta;
+
+    @FindBy(xpath = "//a[@class='ui-datepicker-next ui-corner-all NoFocusable'] [1]")
+    WebElement CambiarMes;
     //Metodos//
     public void Inicio() {
         Log("iniciando");
@@ -71,17 +71,19 @@ public class PaginaInicioPo extends BasePage {
         waitForElementToAppear(origenVuelo);
        origenVuelo.click();
        origenVuelo.sendKeys("BUE");
-       waitFor(2);
+       waitFor(5);
         ciudadBuenosAires.click();
     }
     public void elegirDestino(){
         destinoVuelo.click();
         destinoVuelo.sendKeys("Santiago de Chile");
-        waitFor(2);
+        waitFor(5);
         ciudadSantiagoChile.click();
     }
     public void elegirFechasVuelo(){
         FechaInicio.click();
+        waitFor(2);
+        CambiarMes.click();
         waitFor(2);
         Fecha18.click();
         waitFor(2);
