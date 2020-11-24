@@ -1,7 +1,6 @@
 package seleniumCode;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lan.*;
 import org.openqa.selenium.PageLoadStrategy;
@@ -31,9 +30,8 @@ public class Test {
     this.IP = new InformacionDelPasajero(driver);
     this.EB = new ElegirButacaVuelos(driver);
     this.MP = new MedioDePago(driver);
-    PI.Inicio();
+        PI.Inicio();
     }
-
     @When(": selecciono un destino.")
     public void selecciono_un_destino() throws Exception {
     PI.cierreAlerta();
@@ -54,5 +52,6 @@ public class Test {
     @When(": escojo un medio de pago.")
     public void escojo_un_medio_de_pago() throws Exception {
     MP.SeleccionarMedioDePago();
+    MP.reporter();
     }
 }

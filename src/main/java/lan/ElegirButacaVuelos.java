@@ -31,6 +31,9 @@ public class ElegirButacaVuelos extends BasePage {
 
     @FindBy (xpath = "//*[@id=\"mainContent\"]/div/h1")
     WebElement Tittle;
+
+    @FindBy (id = "continue-anyway-button")
+    WebElement btnContinuarDeTodasFormas;
     //Metodos//
     public void elegirButaca(){
         waitFor(10);
@@ -47,5 +50,9 @@ public class ElegirButacaVuelos extends BasePage {
         waitForElementToAppear(CheckCondiciones);
         CheckCondiciones.click();
         btnConfirmarSeleccion.click();
+        waitFor(3);
+        if(btnContinuarDeTodasFormas.isDisplayed()){
+            btnContinuarDeTodasFormas.click();
+        }
     }
 }

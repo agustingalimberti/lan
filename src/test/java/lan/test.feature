@@ -6,3 +6,4 @@ Feature: comprar un ticket
     When : selecciono un destino.
     And : Lo agrego a la bolsa.
     Then : escojo un medio de pago.
+
